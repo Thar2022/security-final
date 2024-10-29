@@ -1,0 +1,1 @@
+ถ้าใช้พวก dct หรือ dwt algorithm ล่ะ
