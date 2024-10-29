@@ -1,6 +1,6 @@
 // rsa.js
 import forge from "node-forge"; // ใช้ import แทน require
-import crypto  from "crypto"
+import crypto from "crypto";
 // ฟังก์ชันเข้ารหัส
 export function encryptRsaByPem(plainText, publicKeyPem) {
   const publicKey = forge.pki.publicKeyFromPem(publicKeyPem);
@@ -53,9 +53,19 @@ export function decryptPrivateKey(encryptedData) {
 
   return decrypted;
 }
- 
+
+export function generateKey() {
+  const { privateKey, publicKey } = forge.pki.rsa.generateKeyPair({
+    bits: 2048,
+  });
+
+  return {
+    privateKeyPem: forge.pki.privateKeyToPem(privateKey),
+    publicKeyPem: forge.pki.publicKeyToPem(publicKey),
+  };
+}
 
 // สร้างคู่กุญแจ
-const { privateKey, publicKey } = forge.pki.rsa.generateKeyPair({ bits: 2048 });
+const { privateKey, publicKey } = forge.pki.rsa.generateKeyPair({ bits: 2048 }); // สร้าง public key และ private key
 export const privateKeyPem = forge.pki.privateKeyToPem(privateKey);
 export const publicKeyPem = forge.pki.publicKeyToPem(publicKey);
